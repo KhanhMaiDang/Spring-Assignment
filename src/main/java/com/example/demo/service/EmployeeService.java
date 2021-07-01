@@ -8,5 +8,6 @@ public interface EmployeeService {
     public List<Employee> getAllEmployee();
     public Employee getEmployeeById(Integer empId);
     public Employee createEmployee(Employee employee);
-//    public void deleteEmployee(Integer empId);
+    public Employee updateEmployeeName(Integer employeeId, String name);
+    public void deleteEmployee(Integer empId);
 }

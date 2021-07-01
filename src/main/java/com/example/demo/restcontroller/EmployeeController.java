@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.Console;
+import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -43,4 +44,21 @@ public class EmployeeController {
         return employeeService.createEmployee(employee);
     }
 
+    @PutMapping("/updateEmployeeName/{empId}")
+    public Employee updateEmployee(@PathVariable Integer empId, @RequestBody String name){
+        return employeeService.updateEmployeeName(empId,name);
+    }
+
+    @DeleteMapping("/{empId}")
+    public HashMap<String, String> deleteEmployee(@PathVariable Integer empId){
+        if (employeeService.getEmployeeById(empId) == null){
+            throw new EmployeeException(empId);
+        }
+        else{
+            employeeService.deleteEmployee(empId);
+            HashMap<String, String> map = new HashMap<>();
+            map.put("message","Delete successfully!");
+            return map;
+        }
+    }
 }

@@ -40,4 +40,15 @@ public class EmployeeServiceImpl implements EmployeeService {
     public Employee createEmployee(Employee employee) {
         return employeeRepository.save(employee);
     }
+
+    @Override
+    public Employee updateEmployeeName(Integer employeeId ,String name) {
+        return employeeRepository.findById(employeeId).map(employee -> {employee.setName(name);
+        return employeeRepository.save(employee);}).orElseThrow(()->new EmployeeException(employeeId));
+    }
+
+    @Override
+    public void deleteEmployee(Integer empId) {
+        employeeRepository.deleteById(empId);
+    }
 }
